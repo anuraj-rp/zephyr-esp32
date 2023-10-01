@@ -5,7 +5,7 @@
 #include <zephyr/drivers/spi.h>
 
 
-#define SPI_MESSAGE 0xA5
+
 #define SPI_OP SPI_OP_MODE_MASTER | SPI_MODE_CPOL | SPI_MODE_CPHA | SPI_WORD_SET(8) | SPI_LINES_SINGLE
 
 /* Don't use DT for direct SPI control. Use it for device on SPI 
@@ -38,8 +38,9 @@ struct spi_config spi_cfg = {
 //     .cs = SPI_CS_CONTROL_INIT(DT_NODELABEL(spi2), 10),
 // };
 
-uint8_t msg = SPI_MESSAGE;
-struct spi_buf spi_buffer_tx = {.buf = &msg, .len = 1};
+uint32_t msg = 0xAA55AA55;
+
+struct spi_buf spi_buffer_tx = {.buf = &msg, .len = 4};
 
 struct spi_buf_set tx_buffer = {.buffers = &spi_buffer_tx, .count = 1};
 

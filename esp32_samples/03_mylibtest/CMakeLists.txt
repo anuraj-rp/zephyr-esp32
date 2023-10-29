@@ -18,7 +18,7 @@ set(external_project_cflags
     "${includes} ${system_includes} ${definitions} ${options}"
 )
 
-
+message(STATUS "cflags are ${external_project_cflags}")
 include(ExternalProject)
 
 set(mylib_src_dir   ${CMAKE_CURRENT_SOURCE_DIR}/mylib)
@@ -48,6 +48,7 @@ ExternalProject_Add(
   CFLAGS=${external_project_cflags}
   INSTALL_COMMAND ""      # This particular build system has no install command
   BUILD_BYPRODUCTS ${MYLIB_LIB_DIR}/libmylib.a
+  DEPENDS zephyr_interface
   )
 
 add_library(mylib_lib STATIC IMPORTED GLOBAL)
